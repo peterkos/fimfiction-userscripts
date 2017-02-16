@@ -1,6 +1,6 @@
 // ==UserScript==
-// @name         Docx Uploader
-// @namespace    http://quillnblade.com
+// @name         Docx Importer
+// @namespace    fimfiction-docx-importer
 // @version      1.0
 // @description  Upload a .docx file and grab the corresponding chapter content, then convert to BBCode.
 // @author       Kristen "Crystal" Trzonkowski
@@ -9,6 +9,7 @@
 // @match        https://www.fimfiction.net/chapter/*
 // @match        https://www.fimfiction.net/story/*
 // @grant        none
+// @run-at       document-start
 // ==/UserScript==
 
 function addMammoth(callback) {
