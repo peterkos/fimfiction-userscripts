@@ -26,3 +26,4 @@ Pretty straightforward.  If you're someone who responds to a lot of comments at 
 
 **Todo**
 - [ ] Add a button to the comment box to pop it out/in so I don't have to disable the script whenever I don't want the box floating around.
+- [ ] Add a button/setting to change the box's "anchor point"
