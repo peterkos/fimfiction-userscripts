@@ -1,12 +1,12 @@
 // ==UserScript==
-// @name        Sticky FiMfiction Comment Box
-// @namespace   fimfiction-sticky-commment-box
-// @description Makes the comment box sticky on FiMFiction.
-// @include     http://www.fimfiction.net/*
-// @include     https://www.fimfiction.net/*
-// @version     1
-// @grant       none
-// @run-at      document-start
+// @name         Sticky FiMfiction Comment Box
+// @namespace    fimfiction-sticky-commment-box
+// @version      1.0
+// @description  Makes the comment box sticky on FiMFiction.
+// @include      http://www.fimfiction.net/*
+// @include      https://www.fimfiction.net/*
+// @grant        none
+// @run-at       document-start
 // ==/UserScript==
 
 var head, style;
