@@ -9,7 +9,6 @@
 // @match        https://www.fimfiction.net/chapter/*
 // @match        https://www.fimfiction.net/story/*
 // @grant        none
-// @run-at       document-start
 // ==/UserScript==
 
 function addMammoth(callback) {
