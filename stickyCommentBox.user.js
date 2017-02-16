@@ -3,6 +3,7 @@
 // @namespace    fimfiction-sticky-commment-box
 // @version      1.0
 // @description  Makes the comment box sticky on FiMFiction.
+// @author       Kristen "Crystal" Trzonkowski
 // @include      http://www.fimfiction.net/*
 // @include      https://www.fimfiction.net/*
 // @grant        none
