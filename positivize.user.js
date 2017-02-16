@@ -1,10 +1,11 @@
 // ==UserScript==
 // @name        Positivize FiMfiction
 // @namespace   fimfiction-positivize
+// @version     1.0
 // @description Hides dislikes and downvotes for the psychological effect of a more positive experience on FiMFiction.
+// @author       Kristen "Crystal" Trzonkowski
 // @include     http://www.fimfiction.net/*
 // @include     https://www.fimfiction.net/*
-// @version     1
 // @grant       none
 // @run-at      document-start
 // ==/UserScript==
