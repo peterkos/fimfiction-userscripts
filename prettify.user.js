@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name        Prettify FiMfiction
 // @namespace   fimfiction-prettify
-// @version     1.1
+// @version     1.2
 // @description Isn't she lovely...  isn't she wonderful...
 // @author      Kristen "Crystal" Trzonkowski
 // @include     http://www.fimfiction.net/*
@@ -22,9 +22,10 @@ style.type = 'text/css';
 /* Set to true if you want it, false if you don't */
 var options = {
   rainbow: false,  /* Change the blue bar to RAINBOW!  Legibility not guaranteed.  Because Milk wanted rainbows. */
-  avatarSquared: false, /* It's hip to be Square!  Currently only changes comment avatars to squares. */
+  avatarSquared: false, /* It's hip to be SQUARE!  Currently only changes comment avatars to squares. */
   spoilerTags: false, /* CLASSIFIED!  Hide those spoilers like the criminal scum they are! */
-  coloredTags: true /* Return the TAAAGS!  Bring back the different colors for different tags! */
+  coloredTags: false, /* Return colored TAAAGS!  Bring back the different colors for different tags! */
+  characterTags: false  /* Return character TAAAGS!  Because a picture is worth a thousand words. */
 };
 
 style.innerHTML = "";
@@ -167,4 +168,129 @@ if (options.coloredTags) {
   style.innerHTML += "}";
 }
 
+if (options.characterTags) {
+  style.innerHTML += ".story-tags>li a.tag-character, .story-tags>li a.tag-character:hover {";
+  style.innerHTML +=  "background-color: #FFFFFF !important;";
+  style.innerHTML +=  "border: 1px solid #bebab5;";
+  style.innerHTML +=  "border-left-color: #d6d2cb;";
+  style.innerHTML +=  "border-top-color: #d6d2cb;";
+  style.innerHTML +=  "display: inline-block;";
+  style.innerHTML +=  "padding: 3px;";
+  style.innerHTML +=  "margin: 3px;";
+  style.innerHTML +=  "border-radius: 4px;";
+  style.innerHTML += "}";
+
+  style.innerHTML += ".story-tags>li a.tag-character img {";
+  style.innerHTML +=  "background-color: #FFFFFF;";
+  style.innerHTML +=  "border-radius: 4px;";
+  style.innerHTML +=  "vertical-align: middle;";
+  style.innerHTML += "}";
+}
+
 head.appendChild(style);
+
+var prettifyTimeout = setInterval(prettify, 50);
+
+document.onreadystatechange = function () {
+  prettify();
+  clearInterval(prettifyTimeout);
+};
+
+function prettify () {
+  if (options.characterTags) {
+    imagifyElements(getByXPath('//ul[@class="story-tags"]/li/a[@class="tag-character"]'));
+    imagifyElements(getByXPath('//ul[@class="story-tags"]/li/a[@class="tag-character"]'));
+  }
+}
+
+function imagifyElements (elements) {
+  // naming scheme is not consistent
+  var imageNames = {
+    'apple-bloom' : 'apple_bloom',
+    'applejack-eqg' : 'applejack-eg',
+    'berry-punch' : 'berry_punch',
+    'big-macintosh' : 'big_mac',
+    'cake-twins' : 'cake_twins',
+    'crystal-ponies' : 'crystal_ponies',
+    'cutie-mark-crusaders' : 'cmc',
+    'daring-do' : 'daring_do',
+    'derpy-hooves' : 'derpy_hooves',
+    'diamond-dogs' : 'diamond_dogs',
+    'diamond-tiara' : 'diamond_tiara',
+    'dinky-hooves' : 'dinky',
+    'dj-p0n3' : 'dj_pon3',
+    'doctor-whooves' : 'doctor_whooves',
+    'flash-sentry' : 'flash_sentry',
+    'fleur-de-lis' : 'fleur_de_lis',
+    'flim-and-flam' : 'flimflam',
+    'flitter-and-cloudchaser' : 'flitter_and_cloudchaser',
+    'fluttershy-eqg' : 'fluttershy-eg',
+    'granny-smith' : 'granny_smith',
+    'king-sombra'        : 'king_sombra',
+    'lightning-dust' : 'lightning_dust',
+    'main-6' : 'main_6',
+    'main-7-eqg' : 'main-7-eg',
+    'mare-do-well' : 'mare_do_well',
+    'mr-cake' : 'mr_cake',
+    'mrs-cake' : 'mrs_cake',
+    'night-light' : 'twily daddy head',
+    'nightmare-moon' : 'nightmare_moon',
+    'original-character' : 'oc',
+    'pie-sisters' : 'pie_sisters',
+    'pinkie-pie' : 'pinkie_pie',
+    'pinkie-pie-eqg' : 'pinkie-pie-eg',
+    'prince-blueblood' : 'prince_blueblood',
+    'princess-cadance' : 'cadance',
+    'princess-celestia' : 'celestia',
+    'princess-luna' : 'princess_luna',
+    'queen-chrysalis' : 'queen_chrysalis',
+    'rainbow-dash' : 'rainbow_dash',
+    'rainbow-dash-eqg' : 'rainbow-dash-eg',
+    'rarity-eqg' : 'rarity-eg',
+    'shadowbolts-eqg' : 'shadowbolts-eg',
+    'shining-armor' : 'shining_armor',
+    'silver-spoon' : 'silver_spoon',
+    'spike-eqg' : 'spike-eg',
+    'sunset-shimmer' : 'sunset_shimmer',
+    'sweetie-belle' : 'sweetie_belle',
+    'twilight-sparkle' : 'twilight_sparkle',
+    'twilight-sparkle-eqg' : 'twilight-sparkle-eg',
+    'twilight-velvet' : 'twily mommy head',
+    'twinkleshine' : 'twinkle-shine'
+  };
+
+  if (elements.length && elements.length > 0) {
+    for (var i = 0, len = elements.length; i < len; i++) {
+      try {
+        var character = elements[i].getAttribute('data-tag');
+
+        character = imageNames[character] ? imageNames[character] : character;
+
+        elements[i].innerHTML = "<img src='//static.fimfiction.net/images/characters/" + character + ".png' alt='" + element.getAttribute('title') + "'>";
+      } catch (e) { }
+    }
+  }
+  else if (elements.iterateNext) {
+    try {
+      for (var i = 0; i < elements.snapshotLength; i++) {
+        var element = elements.snapshotItem(i),
+            character = element.getAttribute('data-tag');
+
+        character = imageNames[character] ? imageNames[character] : character;
+
+        element.innerHTML = "<img src='//static.fimfiction.net/images/characters/" + character + ".png' alt='" + element.getAttribute('title') + "'>";
+      }
+    } catch (e) { }
+  }
+}
+
+function getByXPath (element) {
+    try {
+      var elements = document.evaluate(element, document, null, 7, null);
+
+      return elements === null ? [] : elements;
+    }
+    catch (e) {
+      return [];
+    }
+}
