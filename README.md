@@ -5,12 +5,13 @@ Various userscripts for use on FiMFiction.net.  Feel free to log issues or make 
 
 Obtain a userscript add-on for your browser, such as Tampermonkey or Greasemonkey, then download the userscript(s) you want to use.  The add-on should pick them up automatically when you download them.  I think viewing the Raw version of a userscript file on Github will attempt to install it as well, so downloading may not even be necessary.
 
-## docxImporter.user.js
+## docxImporter.user.js - CURRENTLY BROKEN AS OF UPDATE 4.0
 For those who use Word .docx files for their writing, this userscript adds an "Import .docx" button to the chapter editor toolbar.  It will find the corresponding chapter based on the title textbox, convert the XML to BBCode, and put the chapter content into the textarea.
 
 Not a perfect conversion; sometimes adds extra line spaces.  Gets the job done well enough, though!
 
 **Todo**
+- [ ] Fix after update 4.0
 - [ ] Update mammoth.js fork to give output as BBCode automatically?
 
 ## Positivize
