@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name        Prettify FiMfiction
 // @namespace   fimfiction-prettify
-// @version     1.0
-// @description Pretty, pretty rainbows!
+// @version     1.1
+// @description Isn't she lovely...  isn't she wonderful...
 // @author      Kristen "Crystal" Trzonkowski
 // @include     http://www.fimfiction.net/*
 // @include     https://www.fimfiction.net/*
@@ -19,22 +19,152 @@ if (!head) { return; }
 style = document.createElement('style');
 style.type = 'text/css';
 
- style.innerHTML = ".user_toolbar { ";
-style.innerHTML +=  "background: #b2cefe;"; /* For browsers that do not support gradients */
-style.innerHTML +=  "background: -webkit-linear-gradient(left, #fea3aa, #f8b88b, #faf884, #baed91, #b2cefe, #f2a2e8);"; /* For Safari 5.1 to 6.0 */
-style.innerHTML +=  "background: -o-linear-gradient(right, #fea3aa, #f8b88b, #faf884, #baed91, #b2cefe, #f2a2e8);"; /* For Opera 11.1 to 12.0 */
-style.innerHTML +=  "background: -moz-linear-gradient(right, #fea3aa, #f8b88b, #faf884, #baed91, #b2cefe, #f2a2e8);"; /* For Firefox 3.6 to 15 */
-style.innerHTML +=  "background: linear-gradient(to right, #fea3aa, #f8b88b, #faf884, #baed91, #b2cefe, #f2a2e8);"; /* Standard syntax (must be last) */
-style.innerHTML += "}";
+/* Set to true if you want it, false if you don't */
+var options = {
+  rainbow: false,  /* Change the blue bar to RAINBOW!  Legibility not guaranteed.  Because Milk wanted rainbows. */
+  avatarSquared: false, /* It's hip to be Square!  Currently only changes comment avatars to squares. */
+  spoilerTags: false, /* CLASSIFIED!  Hide those spoilers like the criminal scum they are! */
+  coloredTags: true /* Return the TAAAGS!  Bring back the different colors for different tags! */
+};
 
-style.innerHTML += ".user_toolbar>ul>li {";
-style.innerHTML +=  "text-shadow: 0px 0px 5px #355e9e;";
-style.innerHTML +=  "color: #FFFFFF;";
-style.innerHTML += "}";
+style.innerHTML = "";
 
-style.innerHTML += ".user_toolbar>ul>li:hover {";
-style.innerHTML +=  "background: #292b2f;";
-style.innerHTML +=  "text-shadow: 0px 0px 5px #355e9e;";
-style.innerHTML += "}";
+if (options.rainbow) {
+  style.innerHTML += ".user_toolbar { ";
+  style.innerHTML +=  "background: #b2cefe;"; /* For browsers that do not support gradients */
+  style.innerHTML +=  "background: -webkit-linear-gradient(left, #fea3aa, #f8b88b, #faf884, #baed91, #b2cefe, #f2a2e8);"; /* For Safari 5.1 to 6.0 */
+  style.innerHTML +=  "background: -o-linear-gradient(right, #fea3aa, #f8b88b, #faf884, #baed91, #b2cefe, #f2a2e8);"; /* For Opera 11.1 to 12.0 */
+  style.innerHTML +=  "background: -moz-linear-gradient(right, #fea3aa, #f8b88b, #faf884, #baed91, #b2cefe, #f2a2e8);"; /* For Firefox 3.6 to 15 */
+  style.innerHTML +=  "background: linear-gradient(to right, #fea3aa, #f8b88b, #faf884, #baed91, #b2cefe, #f2a2e8);"; /* Standard syntax (must be last) */
+  style.innerHTML += "}";
+
+  style.innerHTML += ".user_toolbar>ul>li {";
+  style.innerHTML +=  "text-shadow: 0px 0px 5px #355e9e;";
+  style.innerHTML +=  "color: #FFFFFF;";
+  style.innerHTML += "}";
+}
+
+if (options.avatarSquared) {
+  style.innerHTML += ".user_toolbar>ul>li:hover {";
+  style.innerHTML +=  "background: #292b2f;";
+  style.innerHTML +=  "text-shadow: 0px 0px 5px #355e9e;";
+  style.innerHTML += "}";
+
+  style.innerHTML += ".comment .author .name {";
+  style.innerHTML +=  "border-radius: 3px 3px 0 0;";
+  style.innerHTML += "}";
+
+  style.innerHTML += ".comment .author .avatar {";
+  style.innerHTML +=  "border-radius: 0 0 3px 3px;";
+  style.innerHTML +=  "margin: 0;";
+  style.innerHTML +=  "width: 130px;";
+  style.innerHTML += "}";
+}
+
+if (options.spoilerTags) {
+  style.innerHTML += ".bbcode .spoiler, .article .spoiler {";
+  style.innerHTML +=   "background: #000000;";
+  style.innerHTML +=   "color: #000000;";
+  style.innerHTML +=   "filter: none;";
+  style.innerHTML +=   "transition: none;";
+  style.innerHTML += "}";
+}
+
+if (options.coloredTags) {
+  style.innerHTML += ".story-tags>li a.tag-genre[title=Adventure], .story-tags>li a.tag-genre[data-tag=adventure] {";
+  style.innerHTML +=  "background-color: #45C950 !important;";
+  style.innerHTML +=  "border-color: #27B830 !important;";
+  style.innerHTML += "}";
+
+  style.innerHTML += ".story-tags>li a.tag-genre[title='Alternate Universe'], .story-tags>li a.tag-genre[data-tag=alternate_universe] {";
+  style.innerHTML +=  "background-color: #888888 !important;";
+  style.innerHTML +=  "border-color: #585858 !important;";
+  style.innerHTML += "}";
+
+  style.innerHTML += ".story-tags>li a.tag-genre[title=Anthro], .story-tags>li a.tag-genre[data-tag=anthro] {";
+  style.innerHTML +=  "background-color: #B5695A !important;";
+  style.innerHTML +=  "border-color: #944838 !important;";
+  style.innerHTML += "}";
+
+  style.innerHTML += ".story-tags>li a.tag-genre[title=Comedy], .story-tags>li a.tag-genre[data-tag=comedy] {";
+  style.innerHTML +=  "background-color: #F5A900 !important;";
+  style.innerHTML +=  "border-color: #C18500 !important;";
+  style.innerHTML += "}";
+
+  style.innerHTML += ".story-tags>li a.tag-genre[title=Crossover], .story-tags>li a.tag-genre[data-tag=crossover] {";
+  style.innerHTML +=  "background-color: #47B8A0 !important;";
+  style.innerHTML +=  "border-color: #2AA186 !important;";
+  style.innerHTML += "}";
+
+  style.innerHTML += ".story-tags>li a.tag-genre[title=Dark], .story-tags>li a.tag-genre[data-tag=dark] {";
+  style.innerHTML +=  "background-color: #B93737 !important;";
+  style.innerHTML +=  "border-color: #961A1A !important;";
+  style.innerHTML += "}";
+
+  style.innerHTML += ".story-tags>li a.tag-genre[title=Drama], .story-tags>li a.tag-genre[data-tag=drama] {";
+  style.innerHTML +=  "background-color: #EC50CA !important;";
+  style.innerHTML +=  "border-color: #E22CBA !important;";
+  style.innerHTML += "}";
+
+  style.innerHTML += ".story-tags>li a.tag-genre[title='Equestria Girls'], .story-tags>li a.tag-genre[data-tag=equestria_girls] {";
+  style.innerHTML +=  "background-color: #4D3281 !important;";
+  style.innerHTML +=  "border-color: #381E6B !important;";
+  style.innerHTML += "}";
+
+  style.innerHTML += ".story-tags>li a.tag-genre[title=Human], .story-tags>li a.tag-genre[data-tag=human] {";
+  style.innerHTML +=  "background-color: #B5835A !important;";
+  style.innerHTML +=  "border-color: #946238 !important;";
+  style.innerHTML += "}";
+
+  style.innerHTML += ".story-tags>li a.tag-genre[title=Horror], .story-tags>li a.tag-genre[data-tag=horror] {";
+  style.innerHTML +=  "background-color: #6D232F !important;";
+  style.innerHTML +=  "border-color: #4F0F19 !important;";
+  style.innerHTML += "}";
+
+  style.innerHTML += ".story-tags>li a.tag-genre[title=Mystery], .story-tags>li a.tag-genre[data-tag=mystery] {";
+  style.innerHTML +=  "background-color: #444444 !important;";
+  style.innerHTML +=  "border-color: #000000 !important;";
+  style.innerHTML += "}";
+
+  style.innerHTML += ".story-tags>li a.tag-genre[title=Random], .story-tags>li a.tag-genre[data-tag=random] {";
+  style.innerHTML +=  "background-color: #3f74CE !important;";
+  style.innerHTML +=  "border-color: #1E5BC2 !important;";
+  style.innerHTML += "}";
+
+  style.innerHTML += ".story-tags>li a.tag-genre[title=Romance], .story-tags>li a.tag-genre[data-tag=romance] {";
+  style.innerHTML +=  "background-color: #974BFF !important;";
+  style.innerHTML +=  "border-color: #7D20FF !important;";
+  style.innerHTML += "}";
+
+  style.innerHTML += ".story-tags>li a.tag-genre[title=Sad], .story-tags>li a.tag-genre[data-tag=sad] {";
+  style.innerHTML +=  "background-color: #BD42A7 !important;";
+  style.innerHTML +=  "border-color: #AC2693 !important;";
+  style.innerHTML += "}";
+
+  style.innerHTML += ".story-tags>li a.tag-genre[title='Sci-Fi'], .story-tags>li a.tag-genre[data-tag=scifi] {";
+  style.innerHTML +=  "background-color: #5D62A5 !important;";
+  style.innerHTML +=  "border-color: #3E448B !important;";
+  style.innerHTML += "}";
+
+  style.innerHTML += ".story-tags>li a.tag-genre[title='Second Person'], .story-tags>li a.tag-genre[data-tag=second_person] {";
+  style.innerHTML +=  "background-color: #02A1DB !important;";
+  style.innerHTML +=  "border-color: #016E98 !important;";
+  style.innerHTML += "}";
+
+  style.innerHTML += ".story-tags>li a.tag-genre[title='Slice of Life'], .story-tags>li a.tag-genre[data-tag=slice_of_life] {";
+  style.innerHTML +=  "background-color: #4B86FF !important;";
+  style.innerHTML +=  "border-color: #2067FF !important;";
+  style.innerHTML += "}";
+
+  style.innerHTML += ".story-tags>li a.tag-genre[title=Thriller], .story-tags>li a.tag-genre[data-tag=thriller] {";
+  style.innerHTML +=  "background-color: #D62B2B !important;";
+  style.innerHTML +=  "border-color: #AD1414 !important;";
+  style.innerHTML += "}";
+
+  style.innerHTML += ".story-tags>li a.tag-genre[title=Tragedy], .story-tags>li a.tag-genre[data-tag=tragedy] {";
+  style.innerHTML +=  "background-color: #FFB54B !important;";
+  style.innerHTML +=  "border-color: #EF9A21 !important;";
+  style.innerHTML += "}";
+}
 
 head.appendChild(style);
