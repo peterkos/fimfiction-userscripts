@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name        Prettify FiMfiction
 // @namespace   fimfiction-prettify
-// @version     1.2
+// @version     1.3
 // @description Isn't she lovely...  isn't she wonderful...
 // @author      Kristen "Crystal" Trzonkowski
 // @include     http://www.fimfiction.net/*
@@ -21,6 +21,7 @@ style.type = 'text/css';
 
 /* Set to true if you want it, false if you don't */
 var options = {
+  oldBar: false,  /* Change the blue bar BACK! */
   rainbow: false,  /* Change the blue bar to RAINBOW!  Legibility not guaranteed.  Because Milk wanted rainbows. */
   avatarSquared: false, /* It's hip to be SQUARE!  Currently only changes comment avatars to squares. */
   spoilerTags: false, /* CLASSIFIED!  Hide those spoilers like the criminal scum they are! */
@@ -29,6 +30,55 @@ var options = {
 };
 
 style.innerHTML = "";
+
+if (options.oldBar) {
+  style.innerHTML += ".user_toolbar { ";
+  style.innerHTML +=  "background: #7f8e54;";
+  style.innerHTML +=  "background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #7f8e54), color-stop(100%, #73804c));";
+  style.innerHTML +=  "background: -webkit-linear-gradient(top, #7f8e54 0%, #73804c 100%);";
+  style.innerHTML +=  "background: linear-gradient(to bottom, #7f8e54 0%, #73804c 100%);";
+  style.innerHTML +=  "border-bottom: 1px solid #616c40;";
+  style.innerHTML +=  "text-align: center;";
+  style.innerHTML +=  "border-color: rgba(0,0,0,0.2);";
+  style.innerHTML +=  "box-shadow: 0 0 transparent;";
+  style.innerHTML += "}";
+
+  style.innerHTML += ".user_toolbar>ul>li, .user_toolbar>ul>li:last-of-type {";
+  style.innerHTML +=  "display: inline-block;";
+  style.innerHTML +=  "vertical-align: middle;";
+  style.innerHTML +=  "background: #8b9b5c;";
+  style.innerHTML +=  "background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #8b9b5c), color-stop(100%, #7f8e54));";
+  style.innerHTML +=  "background: -webkit-linear-gradient(top, #8b9b5c 0%, #7f8e54 100%);";
+  style.innerHTML +=  "background: linear-gradient(to bottom, #8b9b5c 0%, #7f8e54 100%);";
+  style.innerHTML +=  "text-shadow: 1px 1px #91a260;";
+  style.innerHTML +=  "font-size: 13px;";
+  style.innerHTML +=  "font-weight: bold;";
+  style.innerHTML +=  "color: #181b10;";
+  style.innerHTML +=  "line-height: 38px;";
+  style.innerHTML +=  "box-shadow: 0px 0px 8px transparent inset;";
+  style.innerHTML +=  "border-right: 1px solid #677344;";
+  style.innerHTML +=  "margin: 0px;";
+  style.innerHTML +=  "position: relative;";
+  style.innerHTML +=  "z-index: 5";
+  style.innerHTML +=  "box-shadow: 0 0 transparent;";
+  style.innerHTML += "}";
+
+  style.innerHTML += ".user_toolbar>ul>li:before, .user_toolbar>ul>li:after {";
+  style.innerHTML +=  "display: none;";
+  style.innerHTML += "}";
+
+  style.innerHTML += ".user_toolbar>ul>li:first-of-type {";
+  style.innerHTML +=  "border-left: 1px solid #677344;";
+  style.innerHTML += "}";
+
+  style.innerHTML += ".user_toolbar>ul>li:hover {";
+  style.innerHTML +=  "background: #97a964;";
+  style.innerHTML +=  "background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #97a964), color-stop(100%, #8b9b5c));";
+  style.innerHTML +=  "background: -webkit-linear-gradient(top, #97a964 0%, #8b9b5c 100%);";
+  style.innerHTML +=  "background: linear-gradient(to bottom, #97a964 0%, #8b9b5c 100%);";
+  style.innerHTML +=  "text-shadow: 1px 1px #9db068;";
+  style.innerHTML += "}";
+}
 
 if (options.rainbow) {
   style.innerHTML += ".user_toolbar { ";
