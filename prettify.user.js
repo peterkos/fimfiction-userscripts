@@ -71,7 +71,7 @@ if (options.oldBar) {
   style.innerHTML +=  "border-left: 1px solid #677344;";
   style.innerHTML += "}";
 
-  style.innerHTML += ".user_toolbar>ul>li:hover {";
+  style.innerHTML += ".user_toolbar>ul>li>a:hover {";
   style.innerHTML +=  "background: #97a964;";
   style.innerHTML +=  "background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #97a964), color-stop(100%, #8b9b5c));";
   style.innerHTML +=  "background: -webkit-linear-gradient(top, #97a964 0%, #8b9b5c 100%);";
